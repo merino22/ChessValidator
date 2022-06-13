@@ -27,7 +27,7 @@ namespace ChessValidator.core.Entities
                 { new Tile("a1"), new Tile("b1"), new Tile("c1"), new Tile("d1"), new Tile("e1"), new Tile("f1"), new Tile("g1"), new Tile("h1")}
             };
             this._movementList = initialPositions;
-            //SetInitialPositions(initialPositions);
+            SetInitialPositions();
         }
 
         public Tile[,] GetBoard()
@@ -35,21 +35,28 @@ namespace ChessValidator.core.Entities
             return this._board;
         }
 
-        public void SetInitialPositions(List<string> initialPositions)
+        public void SetInitialPositions()
         {
+            List<string> messages = new List<string>();
             MovementParser parser = new MovementParser();
-            foreach (var position in initialPositions)
+            foreach (var position in this._movementList)
             {
-                Console.WriteLine(position);
+                //Console.WriteLine(position);
                 Piece newPiece = parser.GetNewPiece(position);
-                //SetTile(newPiece);
+                Movement tmpMovement = parser.GetNewMovement(position);
+                messages.Add(SetTile(newPiece, tmpMovement));
+            }
+
+            foreach(var message in messages)
+            {
+                Console.WriteLine(message);
             }
         }
 
-        public List<string> SetTile(Piece piece, Movement movement)
+        public string SetTile(Piece piece, Movement movement)
         {
             Tile[,] cBoard = this.GetBoard();
-            List<string> messages = new List<string>();
+            //List<string> messages = new List<string>();
 
             for (int i = 0; i < 8; i++)
             {
@@ -59,17 +66,32 @@ namespace ChessValidator.core.Entities
                     {
                         if(piece.GetCode() == 'T')
                         {
-                            if (movement._startMove[0] == movement._endMove[0] && (movement._endMove[1] > 0 && movement._endMove[1] < 9))
+                            if (movement._startMove[0] == movement._endMove[0] && (int.Parse(movement._endMove[1].ToString()) > 0 && int.Parse(movement._endMove[1].ToString()) < 9) && (int.Parse(movement._startMove[1].ToString()) > 0 && int.Parse(movement._startMove[1].ToString()) < 9))
                             {
-                                messages.Add("Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is valid.");
+                                return "Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is valid.";
                             }
                             else if (movement._startMove[1] == movement._endMove[1])
                             {
-                                messages.Add("Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is valid.");
+                                return "Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is valid.";
                             }
                             else
                             {
-                                messages.Add("Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is invalid.");
+                                return "Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is invalid.";
+                            }
+                        }
+                        else if(piece.GetCode() == 'C')
+                        {
+                            return "HEHE";
+                        }
+                        else
+                        {
+                            if (movement._startMove[0] == movement._endMove[0] && (int.Parse(movement._endMove[1].ToString()) > 0 && int.Parse(movement._endMove[1].ToString()) < 9) && ((int.Parse(movement._endMove[1].ToString()) - int.Parse(movement._startMove[1].ToString())) == 1))
+                            {
+                                return "Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is valid.";
+                            }
+                            else
+                            {
+                                return "Movement" + piece.GetCode() + movement._startMove[0] + "-" + movement._startMove[1] + " is invalid.";
                             }
                         }
                         //cBoard[i, j].SetFree(!cBoard[i,j].GetFree());
@@ -77,9 +99,9 @@ namespace ChessValidator.core.Entities
                     }
                 }
             }
-            return messages;
+            return "ERROR: MOVEMENT NOT FOUND";
         }
-        /*
+        
         private List<string> GetPossibleMovements(Piece piece)
         {
             List<string> possibleMoves = new List<string>();
@@ -89,14 +111,14 @@ namespace ChessValidator.core.Entities
             switch (piece.GetCode())
             {
                 case 'C':
-                    string pos = cBoard[coords[0, 0] + 3, coords[0, 1] + 1].GetCoordinate();
-                    string pos2 = cBoard[coords[0, 0] + 3, coords[0, 1] - 1].GetCoordinate();
-                    string pos3 = cBoard[coords[0, 0] - 3, coords[0, 1] + 1].GetCoordinate();
-                    string pos4 = cBoard[coords[0, 0] - 3, coords[0, 1] - 1].GetCoordinate();
-                    string pos5 = cBoard[coords[0, 0] + 1, coords[0, 1] + 3].GetCoordinate();
-                    string pos6 = cBoard[coords[0, 0] + 1, coords[0, 1] - 3].GetCoordinate();
-                    string pos7 = cBoard[coords[0, 0] - 1, coords[0, 1] + 3].GetCoordinate();
-                    string pos8 = cBoard[coords[0, 0] - 1, coords[0, 1] - 3].GetCoordinate();
+                    string pos = cBoard[coords[0, 0] + 2, coords[0, 1] + 1].GetCoordinate();
+                    string pos2 = cBoard[coords[0, 0] + 2, coords[0, 1] - 1].GetCoordinate();
+                    string pos3 = cBoard[coords[0, 0] - 2, coords[0, 1] + 1].GetCoordinate();
+                    string pos4 = cBoard[coords[0, 0] - 2, coords[0, 1] - 1].GetCoordinate();
+                    string pos5 = cBoard[coords[0, 0] + 1, coords[0, 1] + 2].GetCoordinate();
+                    string pos6 = cBoard[coords[0, 0] + 1, coords[0, 1] - 2].GetCoordinate();
+                    string pos7 = cBoard[coords[0, 0] - 1, coords[0, 1] + 2].GetCoordinate();
+                    string pos8 = cBoard[coords[0, 0] - 1, coords[0, 1] - 2].GetCoordinate();
                     break;
                 case 'T':
 
@@ -105,8 +127,8 @@ namespace ChessValidator.core.Entities
 
                     break;
             }
+            return possibleMoves;
         }
-        */
 
         private int[,] GetPosition(string pos)
         {

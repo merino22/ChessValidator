@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32516.85
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessValidator.core", "ChessValidator.core\ChessValidator.core.csproj", "{3984D9F0-597B-4D1E-9B75-98707079BDC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessValidator.core", "ChessValidator.core\ChessValidator.core.csproj", "{3984D9F0-597B-4D1E-9B75-98707079BDC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessValidator.Infrastructure", "ChessValidator.Infrastructure\ChessValidator.Infrastructure.csproj", "{951DD9E7-4623-4A1C-A7DB-02881B3BE213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessValidator.App", "ChessValidator.App\ChessValidator.App.csproj", "{D0C9A94B-49C6-4054-8ABC-3F547CFC0E65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{3984D9F0-597B-4D1E-9B75-98707079BDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3984D9F0-597B-4D1E-9B75-98707079BDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3984D9F0-597B-4D1E-9B75-98707079BDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951DD9E7-4623-4A1C-A7DB-02881B3BE213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951DD9E7-4623-4A1C-A7DB-02881B3BE213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951DD9E7-4623-4A1C-A7DB-02881B3BE213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951DD9E7-4623-4A1C-A7DB-02881B3BE213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C9A94B-49C6-4054-8ABC-3F547CFC0E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C9A94B-49C6-4054-8ABC-3F547CFC0E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C9A94B-49C6-4054-8ABC-3F547CFC0E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C9A94B-49C6-4054-8ABC-3F547CFC0E65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
